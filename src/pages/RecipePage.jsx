@@ -1,14 +1,4 @@
-import {
-  Button,
-  Heading,
-  Image,
-  Text,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Flex,
-} from "@chakra-ui/react";
+import { Button, Heading, Image, Text } from "@chakra-ui/react";
 
 export const RecipePage = ({ recipe, setSelectedRecipe }) => {
   return (
