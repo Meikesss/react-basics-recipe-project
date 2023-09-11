@@ -1,5 +1,6 @@
 import { Center, Heading, Tag, Text } from "@chakra-ui/react";
 import { data } from "../utils/data";
+import { RecipeCard } from "../components/ui/RecipeCard";
 
 export const RecipeListPage = ({ setSelectedRecipe }) => {
   // You can play around with the console log, but ultimately remove it once you are done
