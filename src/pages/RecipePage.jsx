@@ -1,44 +1,100 @@
-import { Button, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  Text,
+  Image,
+  Grid,
+  GridItem,
+  Flex,
+  Badge,
+  HStack,
+} from "@chakra-ui/react";
 
 export const RecipePage = ({ recipe, setSelectedRecipe }) => {
   return (
-    <>
-      <Button onClick={() => setSelectedRecipe(null)}>Back</Button>
-      <Heading>{recipe.label}</Heading>
-      <Image src={recipe.image} />
-      <Text>{recipe.mealType}</Text>
-      <Heading>{recipe.label}</Heading>
-      <Text>Total cooking time:{recipe.totalTime} minutes</Text>
-      <Text>Servings:{recipe.yield}</Text>
+    <Grid
+      templateColumns="1fr 2fr 2fr 1fr"
+      p={4}
+      gap={4}
+      bg="pink.100"
+      borderRadius="lg"
+    >
+      <GridItem
+        colStart={2}
+        colSpan={2}
+        bg="white"
+        borderRadius="md"
+        p={4}
+        boxShadow="xl"
+      >
+        <Button
+          variant="outline"
+          borderColor="black"
+          onClick={() => setSelectedRecipe(null)}
+          mb={4}
+        >
+          Back
+        </Button>
 
-      <Heading size="md">Ingredients:</Heading>
-      {recipe.ingredientLines.map((ingredient, index) => (
-        <Text key={index}>{ingredient}</Text>
-      ))}
+        <Heading mb={4} textAlign="center">
+          {recipe.label}
+        </Heading>
 
-      <Heading size="md">Health labels:</Heading>
-      <Text>{recipe.healthLabels.join(", ")}</Text>
+        <HStack spacing={5} mb={4} justifyContent="center">
+          <Text>Cooking Time: {recipe.totalTime} mins</Text>
+          <Text>Servings: {recipe.yield}</Text>
+          <Text>Meal Type: {recipe.mealType.join(", ")}</Text>
+        </HStack>
 
-      <Heading size="md">Diet:</Heading>
-      <Text>{recipe.dietLabels.join(", ")}</Text>
+        <Flex>
+          <Flex direction="column" width="50%" mt="8" mb="4">
+            <Heading size="md" mb={4}>
+              Ingredients
+            </Heading>
+            {recipe.ingredientLines.map((ingredient, index) => (
+              <Text key={index}>{ingredient}</Text>
+            ))}
+          </Flex>
 
-      <Heading size="md">Cautions:</Heading>
-      <Text>{recipe.cautions.join(", ")}</Text>
+          <Flex width="50%" height="fit-content" align="flex-start">
+            <Image
+              src={recipe.image}
+              alt={recipe.label}
+              width="100%"
+              height="300px" // Fixed height here
+              objectFit="cover"
+              borderRadius="md"
+              my={4}
+            />
+          </Flex>
+        </Flex>
 
-      <Heading size="md">Total nutrients:</Heading>
-      {recipe.totalNutrients ? (
-        Object.keys(recipe.totalNutrients).map((nutrientKey) => {
-          const nutrient = recipe.totalNutrients[nutrientKey];
-          return (
-            <Text key={nutrientKey}>
-              {" "}
-              {nutrient.label}: {nutrient.quantity.toFixed(2)} {nutrient.unit}
-            </Text>
-          );
-        })
-      ) : (
-        <Text>No nutrient information available</Text>
-      )}
-    </>
+        <Heading size="sm" mb={2} mt={2}>
+          Health labels
+        </Heading>
+        {recipe.healthLabels && (
+          <Flex flexWrap="wrap" gap={2} mb={4} mt={4}>
+            {recipe.healthLabels.map((label, index) => (
+              <Badge key={index} borderRadius="full" px="2" colorScheme="teal">
+                {label}
+              </Badge>
+            ))}
+          </Flex>
+        )}
+
+        <Heading size="sm" mb={2} mt={2}>
+          Diet
+        </Heading>
+        {recipe.dietLabels && (
+          <Flex flexWrap="wrap" gap={2} mb={2} mt={4}>
+            {recipe.dietLabels.map((label, index) => (
+              <Badge key={index} borderRadius="full" px="2" colorScheme="blue">
+                {label}
+              </Badge>
+            ))}
+          </Flex>
+        )}
+      </GridItem>
+    </Grid>
   );
 };
