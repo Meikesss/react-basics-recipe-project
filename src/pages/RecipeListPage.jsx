@@ -5,10 +5,6 @@ import { useState } from "react";
 import { SearchComponent } from "../components/SearchComponent";
 
 export const RecipeListPage = ({ setSelectedRecipe }) => {
-  // You can play around with the console log, but ultimately remove it once you are done
-  console.log(data.hits[0].recipe.label);
-  console.log(data.hits.length);
-
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (newSearchTerm) => {
@@ -28,7 +24,7 @@ export const RecipeListPage = ({ setSelectedRecipe }) => {
 
   return (
     <Center flexDir="column" backgroundColor="pink.100">
-      <Heading mb="4" mt="8">
+      <Heading mb="4" mt="8" ml="4" mr="4" fontSize="5xl">
         Fabulous Recipes for fabulous Queens!
       </Heading>
 
